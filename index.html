@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লগইন - Mobile POS BD</title>
+    <title>Login - Mobile POS BD</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-900 flex items-center justify-center min-h-screen">
@@ -11,42 +11,62 @@
     <div class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-slate-700">
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-white mb-2">Mobile POS BD</h1>
-            <p class="text-slate-400 text-sm">রিটেইল ও ইনভেন্টরি ম্যানেজমেন্ট সিস্টেম</p>
+            <p class="text-slate-400 text-sm">Retail & Inventory Management System</p>
         </div>
         
         <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-5">
             <div>
-                <label class="block text-slate-300 text-sm font-medium mb-2">প্যানেল রোল সিলেক্ট করুন</label>
-                <select id="role" class="w-full bg-slate-700 text-white border border-slate-600 rounded-xl p-3 focus:outline-none focus:border-emerald-500">
-                    <option value="admin">Super Admin (সুপার অ্যাডমিন)</option>
-                    <option value="shop">Retail Shop (রিটেইল শপ)</option>
-                </select>
+                <label class="block text-slate-300 text-sm font-medium mb-2">User ID / Username</label>
+                <input type="text" id="username" required class="w-full bg-slate-700 text-white border border-slate-600 rounded-xl p-3 focus:outline-none focus:border-emerald-500" placeholder="User ID din (jemon: admin ba shop)">
             </div>
 
             <div>
-                <label class="block text-slate-300 text-sm font-medium mb-2">ইউজারনেম বা ইমেইল</label>
-                <input type="text" id="username" required class="w-full bg-slate-700 text-white border border-slate-600 rounded-xl p-3 focus:outline-none focus:border-emerald-500" placeholder="আপনার ইউজারনেম দিন">
-            </div>
-
-            <div>
-                <label class="block text-slate-300 text-sm font-medium mb-2">পাসওয়ার্ড</label>
+                <label class="block text-slate-300 text-sm font-medium mb-2">Password</label>
                 <input type="password" id="password" required class="w-full bg-slate-700 text-white border border-slate-600 rounded-xl p-3 focus:outline-none focus:border-emerald-500" placeholder="••••••••">
             </div>
 
-            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3 rounded-xl transition duration-200 shadow-lg shadow-emerald-600/30">লগইন করুন</button>
+            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3 rounded-xl transition duration-200 shadow-lg shadow-emerald-600/30">Login</button>
         </form>
+
+        <div class="mt-6 text-center border-t border-slate-700 pt-4">
+            <p class="text-slate-400 text-sm">Retail shop account nei?</p>
+            <button onclick="openRegisterModal()" class="text-emerald-400 font-medium text-sm hover:underline mt-1">Notun Account Khulun (Register)</button>
+        </div>
+    </div>
+
+    <!-- Simple Register Modal / Notice -->
+    <div id="registerModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center p-4">
+        <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-md border border-slate-700 text-white">
+            <h3 class="text-xl font-bold mb-4 text-emerald-400">Retail Shop Account Registration</h3>
+            <p class="text-sm text-slate-300 mb-4">Ekhane notun shop registration form ba details thakbe, jeta diye apra notun account open korte parben.</p>
+            <button onclick="closeRegisterModal()" class="w-full bg-rose-600 hover:bg-rose-500 py-2 rounded-xl font-medium">Bondo korun</button>
+        </div>
     </div>
 
     <script>
         function handleLogin(event) {
             event.preventDefault();
-            const role = document.getElementById('role').value;
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
             
-            if (role === 'admin') {
+            // Jodi admin ebong admin hoy, tahole super admin dashboard-e jabe
+            if (username === 'admin' && password === 'admin') {
                 window.location.href = 'dashboard.html';
-            } else {
+            } 
+            // Onno idthokale retail shop dashboard-e jabe
+            else if (username !== '' && password !== '') {
                 window.location.href = 'shop_dashboard.html';
+            } else {
+                alert('Sothik User ID ebong Password din!');
             }
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').classList.remove('hidden');
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').classList.add('hidden');
         }
     </script>
 </body>
