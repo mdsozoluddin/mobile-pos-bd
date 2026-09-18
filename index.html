@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile POS BD - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center h-screen">
+
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl w-96 border border-gray-700">
+        <h2 class="text-2xl font-bold text-center text-white mb-6">Mobile POS BD</h2>
+        
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="mb-4">
+                <label class="block text-gray-400 text-sm mb-2">রোল সিলেক্ট করুন</label>
+                <select id="role" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 focus:outline-none focus:border-green-500">
+                    <option value="admin">Super Admin</option>
+                    <option value="shop">Retail Shop</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-400 text-sm mb-2">ইউজারনেম</label>
+                <input type="text" id="username" required class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 focus:outline-none focus:border-green-500" placeholder="আপনার ইউজারনেম দিন">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-400 text-sm mb-2">পাসওয়ার্ড</label>
+                <input type="password" id="password" required class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 focus:outline-none focus:border-green-500" placeholder="********">
+            </div>
+
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold p-3 rounded-lg transition duration-200">লগইন করুন</button>
+        </form>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const role = document.getElementById('role').value;
+            
+            if (role === 'admin') {
+                window.location.href = 'dashboard.html';
+            } else {
+                window.location.href = 'shop_dashboard.html';
+            }
+        }
+    </script>
+</body>
+</html>
