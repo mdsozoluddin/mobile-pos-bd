@@ -3,56 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retail Shop Dashboard - Mobile POS BD</title>
+    <title>Complete Retail Shop Dashboard - Mobile POS BD</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-emerald-900 text-white flex flex-col hidden md:flex">
-        <div class="p-6 text-xl font-bold border-b border-emerald-800 flex items-center justify-between">
-            <span>🛒 Shop Portal</span>
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col hidden md:flex shadow-xl border-r border-slate-800">
+        <div class="p-5 text-base font-bold border-b border-slate-800 flex items-center gap-2 text-white">
+            <span>📱 SA Telecom & Electronics</span>
         </div>
-        <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto text-sm">
-            <button onclick="switchShopTab('dashboard')" id="shop-nav-dashboard" class="w-full text-left py-2.5 px-4 rounded-xl bg-emerald-800 text-white font-medium shadow-md transition flex items-center gap-3">
+        <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-xs">
+            <button onclick="switchShopTab('dashboard')" id="shop-nav-dashboard" class="w-full text-left py-2 px-3 rounded-xl bg-emerald-600 text-white font-medium shadow transition flex items-center gap-3">
                 <span>📊</span> Dashboard
             </button>
-            <button onclick="switchShopTab('sales')" id="shop-nav-sales" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
+            <button onclick="switchShopTab('sales')" id="shop-nav-sales" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
                 <span>💰</span> Sales
             </button>
-            <button onclick="switchShopTab('sales-return')" id="shop-nav-sales-return" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
+            <button onclick="switchShopTab('installment')" id="shop-nav-installment" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>💳</span> Installment Sale
+            </button>
+            <button onclick="switchShopTab('sales-return')" id="shop-nav-sales-return" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
                 <span>↩️</span> Sales Return
             </button>
-            <button onclick="switchShopTab('exchange')" id="shop-nav-exchange" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>🔄</span> Exchange
+            <button onclick="switchShopTab('money-receipt')" id="shop-nav-money-receipt" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>🧾</span> Money Receipt
             </button>
-            <button onclick="switchShopTab('credit-recovery')" id="shop-nav-credit-recovery" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>📥</span> Credit Recovery
+            <button onclick="switchShopTab('exchange')" id="shop-nav-exchange" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>🔄</span> Exchanges
             </button>
-            <button onclick="switchShopTab('customer-list')" id="shop-nav-customer-list" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>👥</span> Customer List
+            <button onclick="switchShopTab('customers')" id="shop-nav-customers" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>👥</span> Customers
             </button>
-            <button onclick="switchShopTab('purchase')" id="shop-nav-purchase" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>🛒</span> Purchase
+            <button onclick="switchShopTab('purchases')" id="shop-nav-purchases" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>🛒</span> Purchases
             </button>
-            <button onclick="switchShopTab('purchase-return')" id="shop-nav-purchase-return" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>🔙</span> Purchase Return
+            <button onclick="switchShopTab('service-sale')" id="shop-nav-service-sale" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>🛠️</span> Service Sale
             </button>
-            <button onclick="switchShopTab('supplier-payment')" id="shop-nav-supplier-payment" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>💸</span> Supplier Payment
+            <button onclick="switchShopTab('warranty')" id="shop-nav-warranty" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>🛡️</span> Warranty
             </button>
-            <button onclick="switchShopTab('supplier-list')" id="shop-nav-supplier-list" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>🏢</span> Supplier List
+            <button onclick="switchShopTab('quotation')" id="shop-nav-quotation" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>📄</span> Quotation
             </button>
-            <button onclick="switchShopTab('new-product-entry')" id="shop-nav-new-product-entry" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>➕</span> New Product Entry
+            <button onclick="switchShopTab('vouchers')" id="shop-nav-vouchers" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>📑</span> Vouchers
             </button>
-            <button onclick="switchShopTab('product-list')" id="shop-nav-product-list" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
-                <span>📦</span> Product List
+            <button onclick="switchShopTab('balance-transfer')" id="shop-nav-balance-transfer" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>💸</span> Balance Transfer
+            </button>
+            <button onclick="switchShopTab('balance-adjustment')" id="shop-nav-balance-adjustment" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>⚖️</span> Balance Adjustment
+            </button>
+            <button onclick="switchShopTab('employees')" id="shop-nav-employees" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>👨‍💼</span> Employees
+            </button>
+            <button onclick="switchShopTab('expense-type')" id="shop-nav-expense-type" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>🏷️</span> Expense Type
+            </button>
+            <button onclick="switchShopTab('loans')" id="shop-nav-loans" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>🏦</span> Loans
+            </button>
+            <button onclick="switchShopTab('main-settings')" id="shop-nav-main-settings" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>⚙️</span> Main Settings
+            </button>
+            <button onclick="switchShopTab('reports')" id="shop-nav-reports" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>📈</span> Reports
+            </button>
+            <button onclick="switchShopTab('database-backup')" id="shop-nav-database-backup" class="w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3">
+                <span>💾</span> Database Backup
             </button>
         </nav>
-        <div class="p-4 border-t border-emerald-800">
-            <a href="index.html" class="flex items-center justify-center gap-2 w-full bg-rose-600 hover:bg-rose-500 py-2.5 rounded-xl text-white font-medium transition text-sm">
+        <div class="p-3 border-t border-slate-800">
+            <a href="index.html" class="flex items-center justify-center gap-2 w-full bg-rose-600 hover:bg-rose-500 py-2 rounded-xl text-white font-medium transition text-xs">
                 <span>🚪</span> Logout
             </a>
         </div>
@@ -62,139 +86,71 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         <header class="bg-white border-b border-slate-200 p-4 md:px-8 flex justify-between items-center shadow-sm">
             <div>
-                <h1 id="shop-page-title" class="text-xl font-bold text-emerald-900">Dashboard Overview</h1>
-                <p class="text-xs text-slate-500">Shafkat Telecom & Exchange Zone</p>
+                <h1 id="shop-page-title" class="text-xl font-bold text-slate-800">Business Overview</h1>
+                <p id="shop-page-sub" class="text-xs text-slate-500">Monitor sales, stock, expenses, collections</p>
             </div>
             <span class="text-xs bg-emerald-100 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full font-medium">Shop ID: #POS-102</span>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6">
+        <main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 bg-slate-50">
             
-            <!-- 1. Dashboard Tab -->
+            <!-- Dashboard Tab Content -->
             <div id="shop-tab-dashboard" class="shop-content-tab space-y-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <p class="text-slate-500 text-sm">Today's Sales</p>
-                        <h3 class="text-2xl font-bold text-emerald-600 mt-1">৳ ২৫,০০০</h3>
+                        <p class="text-slate-500 text-sm">Petty Cash Balance</p>
+                        <h3 class="text-2xl font-bold text-emerald-600 mt-1">৳ ৩,৪৯২,২৫০.০০</h3>
                     </div>
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <p class="text-slate-500 text-sm">Total Stock Items</p>
-                        <h3 class="text-2xl font-bold text-blue-600 mt-1">১১৪ টি</h3>
+                        <p class="text-slate-500 text-sm">Customer Due</p>
+                        <h3 class="text-2xl font-bold text-amber-600 mt-1">৳ ৫০০.০০</h3>
                     </div>
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <p class="text-slate-500 text-sm">Credit Due</p>
-                        <h3 class="text-2xl font-bold text-amber-600 mt-1">৳ ৮,৫০০</h3>
+                        <p class="text-slate-500 text-sm">Today's Transaction</p>
+                        <h3 class="text-2xl font-bold text-blue-600 mt-1">৳ ০.০০</h3>
                     </div>
                     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <p class="text-slate-500 text-sm">Total Suppliers</p>
-                        <h3 class="text-2xl font-bold text-purple-600 mt-1">১২ টি</h3>
+                        <p class="text-slate-500 text-sm">Total Collection</p>
+                        <h3 class="text-2xl font-bold text-purple-600 mt-1">৳ ০.০০</h3>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. Sales Tab -->
-            <div id="shop-tab-sales" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Sales (POS Terminal & History)</h2>
-                    <p class="text-slate-600 text-sm">Manage daily customer billing, mobile and accessories sales here.</p>
-                </div>
-            </div>
-
-            <!-- Sales Return Tab -->
-            <div id="shop-tab-sales-return" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Sales Return</h2>
-                    <p class="text-slate-600 text-sm">Process items returned by customers.</p>
-                </div>
-            </div>
-
-            <!-- Exchange Tab -->
-            <div id="shop-tab-exchange" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Product Exchange Zone</h2>
-                    <p class="text-slate-600 text-sm">Handle old phone exchange and upgrades.</p>
-                </div>
-            </div>
-
-            <!-- Credit Recovery Tab -->
-            <div id="shop-tab-credit-recovery" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Credit Recovery (Baki Aday)</h2>
-                    <p class="text-slate-600 text-sm">Track and collect due payments from customers.</p>
-                </div>
-            </div>
-
-            <!-- Customer List Tab -->
-            <div id="shop-tab-customer-list" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Customer List</h2>
-                    <p class="text-slate-600 text-sm">Directory of all retail customers and buyers.</p>
-                </div>
-            </div>
-
-            <!-- 3. Purchase Tab -->
-            <div id="shop-tab-purchase" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Purchase Management</h2>
-                    <p class="text-slate-600 text-sm">Record new stock purchases from wholesale suppliers.</p>
-                </div>
-            </div>
-
-            <!-- Purchase Return Tab -->
-            <div id="shop-tab-purchase-return" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Purchase Return</h2>
-                    <p class="text-slate-600 text-sm">Return defective items back to suppliers.</p>
-                </div>
-            </div>
-
-            <!-- Supplier Payment Tab -->
-            <div id="shop-tab-supplier-payment" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Supplier Payment</h2>
-                    <p class="text-slate-600 text-sm">Manage vendor billing and payment clearances.</p>
-                </div>
-            </div>
-
-            <!-- Supplier List Tab -->
-            <div id="shop-tab-supplier-list" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Supplier List</h2>
-                    <p class="text-slate-600 text-sm">List of registered mobile and accessories vendors.</p>
-                </div>
-            </div>
-
-            <!-- 4. New Product Entry Tab -->
-            <div id="shop-tab-new-product-entry" class="shop-content-tab hidden space-y-4">
+            <!-- Dynamic Module Content Area -->
+            <div id="shop-tab-dynamic" class="shop-content-tab hidden space-y-4">
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <h2 class="text-xl font-bold text-emerald-900">New Product Entry (IMEI & Details)</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex justify-between items-center border-b pb-3">
                         <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Product Name</label>
-                            <input type="text" placeholder="e.g. Motorola Edge 50" class="w-full border border-slate-300 rounded-xl p-2.5 text-sm">
+                            <h2 id="dyn-title" class="text-lg font-bold text-slate-800">Module Title</h2>
+                            <p id="dyn-desc" class="text-xs text-slate-500">Manage records and data efficiently.</p>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">IMEI Number</label>
-                            <input type="text" placeholder="Scan or enter IMEI..." class="w-full border border-slate-300 rounded-xl p-2.5 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Purchase Price</label>
-                            <input type="number" placeholder="৳ 0.00" class="w-full border border-slate-300 rounded-xl p-2.5 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Selling Price</label>
-                            <input type="number" placeholder="৳ 0.00" class="w-full border border-slate-300 rounded-xl p-2.5 text-sm">
-                        </div>
+                        <button onclick="alert('New entry modal opened!')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs px-4 py-2 rounded-xl font-medium transition">+ Add New</button>
                     </div>
-                    <button onclick="alert('Product added successfully!')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-6 py-2.5 rounded-xl transition text-sm">Save Product</button>
-                </div>
-            </div>
-
-            <!-- Product List Tab -->
-            <div id="shop-tab-product-list" class="shop-content-tab hidden space-y-4">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Product List / Stock Inventory</h2>
-                    <p class="text-slate-600 text-sm">Complete available items inventory list with search and filters.</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr id="dyn-table-head" class="bg-slate-100 text-slate-700 border-b">
+                                    <th class="p-3">ID / Code</th>
+                                    <th class="p-3">Details / Name</th>
+                                    <th class="p-3">Date / Status</th>
+                                    <th class="p-3">Amount</th>
+                                    <th class="p-3 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dyn-table-body" class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-3 font-medium">#1001</td>
+                                    <td class="p-3">Sample Record Item</td>
+                                    <td class="p-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px]">Active</span></td>
+                                    <td class="p-3 font-bold">৳ ১,০০০.০০</td>
+                                    <td class="p-3 text-right">
+                                        <button onclick="alert('Edit action clicked')" class="text-blue-600 hover:underline mr-2">Edit</button>
+                                        <button onclick="alert('Delete action clicked')" class="text-rose-600 hover:underline">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -202,23 +158,69 @@
     </div>
 
     <script>
-        function switchShopTab(tabId) {
-            const tabs = document.querySelectorAll('.shop-content-tab');
-            tabs.forEach(tab => tab.classList.add('hidden'));
+        const moduleData = {
+            'sales': { title: 'Sales Management', sub: 'POS terminal and sales invoices', col1: 'Invoice No', col2: 'Customer Name', col3: 'Payment Status', col4: 'Total Bill' },
+            'installment': { title: 'Installment Sale Management', sub: 'Customer mobile device loan tracking', col1: 'Loan ID', col2: 'Customer Name', col3: 'Next Installment', col4: 'Due Balance' },
+            'sales-return': { title: 'Sales Return Processing', sub: 'Manage customer product returns and refunds', col1: 'Return ID', col2: 'Product & IMEI', col3: 'Return Date', col4: 'Refund Amount' },
+            'money-receipt': { title: 'Money Receipt Management', sub: 'Print customer payment receipts', col1: 'Receipt No', col2: 'Paid By', col3: 'Date', col4: 'Amount' },
+            'exchange': { title: 'Product Exchanges', sub: 'Old phone exchange and upgrade records', col1: 'Exchange ID', col2: 'Old Model / IMEI', col3: 'New Model', col4: 'Difference' },
+            'customers': { title: 'Customer Directory', sub: 'Retail customer profiles and due ledgers', col1: 'Customer ID', col2: 'Name & Mobile', col3: 'Total Purchases', col4: 'Current Due' },
+            'purchases': { title: 'Purchase Management', sub: 'Wholesale supplier stock purchases', col1: 'Purchase ID', col2: 'Supplier Name', col3: 'Date', col4: 'Total Cost' },
+            'service-sale': { title: 'Service & Repair Sales', sub: 'Mobile repairing and servicing bills', col1: 'Service ID', col2: 'Device Issue', col3: 'Technician', col4: 'Service Fee' },
+            'warranty': { title: 'Warranty Management', sub: 'Track manufacturer and shop warranty status', col1: 'IMEI / Serial', col2: 'Device Name', col3: 'Customer', col4: 'Warranty Status' },
+            'quotation': { title: 'Price Quotations', sub: 'Generated quotations for buyers', col1: 'Quotation ID', col2: 'Client Name', col3: 'Valid Until', col4: 'Estimated Cost' },
+            'vouchers': { title: 'Vouchers & Receipts', sub: 'Income and expense vouchers', col1: 'Voucher No', col2: 'Category', col3: 'Type', col4: 'Amount' },
+            'balance-transfer': { title: 'Balance Transfer', sub: 'Transfer money between cash and bank', col1: 'Transfer ID', col2: 'From Account', col3: 'To Account', col4: 'Transfer Amount' },
+            'balance-adjustment': { title: 'Balance Adjustment', sub: 'Petty cash and ledger adjustments', col1: 'Adjustment ID', col2: 'Reason', col3: 'Date', col4: 'Adjusted Amount' },
+            'employees': { title: 'Employee Management', sub: 'Staff payroll, attendance, and details', col1: 'Emp ID', col2: 'Name & Designation', col3: 'Phone', col4: 'Monthly Salary' },
+            'expense-type': { title: 'Expense Types Setup', sub: 'Daily operating expense categories', col1: 'Type ID', col2: 'Category Name', col3: 'Status', col4: 'Total Expense' },
+            'loans': { title: 'Loans Management', sub: 'Business loan records and repayments', col1: 'Loan ID', col2: 'Bank / Source', col3: 'Repayment Date', col4: 'Loan Amount' },
+            'main-settings': { title: 'Main System Settings', sub: 'Configure shop profile, printer, and logo', col1: 'Setting Key', col2: 'Description', col3: 'Status', col4: 'Action' },
+            'reports': { title: 'Comprehensive Reports', sub: 'Profit-loss, sales, and stock analytical reports', col1: 'Report Type', col2: 'Period', col3: 'Generated By', col4: 'Summary' },
+            'database-backup': { title: 'Database Backup', sub: 'Download and secure system data backups', col1: 'Backup File', col2: 'Size', col3: 'Created Date', col4: 'Download' }
+        };
 
+        function switchShopTab(tabId) {
+            const dashboardTab = document.getElementById('shop-tab-dashboard');
+            const dynamicTab = document.getElementById('shop-tab-dynamic');
+
+            // Reset navigation active styles
             const navButtons = document.querySelectorAll('aside nav button');
             navButtons.forEach(btn => {
-                btn.className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3";
+                btn.className = "w-full text-left py-2 px-3 rounded-xl hover:bg-slate-800 text-slate-300 transition flex items-center gap-3";
             });
-
-            const targetTab = document.getElementById('shop-tab-' + tabId);
-            if (targetTab) {
-                targetTab.classList.remove('hidden');
-            }
 
             const targetNav = document.getElementById('shop-nav-' + tabId);
             if (targetNav) {
-                targetNav.className = "w-full text-left py-2.5 px-4 rounded-xl bg-emerald-800 text-white font-medium shadow-md transition flex items-center gap-3";
+                targetNav.className = "w-full text-left py-2 px-3 rounded-xl bg-emerald-600 text-white font-medium shadow transition flex items-center gap-3";
+            }
+
+            if (tabId === 'dashboard') {
+                dashboardTab.classList.remove('hidden');
+                dynamicTab.classList.add('hidden');
+                document.getElementById('shop-page-title').innerText = "Business Overview";
+                document.getElementById('shop-page-sub').innerText = "Monitor sales, stock, expenses, collections";
+            } else {
+                dashboardTab.classList.add('hidden');
+                dynamicTab.classList.remove('hidden');
+                
+                if (moduleData[tabId]) {
+                    const data = moduleData[tabId];
+                    document.getElementById('dyn-title').innerText = data.title;
+                    document.getElementById('dyn-desc').innerText = data.sub;
+                    document.getElementById('shop-page-title').innerText = data.title;
+                    document.getElementById('shop-page-sub').innerText = data.sub;
+
+                    // Update Table Headings dynamically
+                    const headRow = document.getElementById('dyn-table-head');
+                    headRow.innerHTML = `
+                        <th class="p-3">${data.col1}</th>
+                        <th class="p-3">${data.col2}</th>
+                        <th class="p-3">${data.col3}</th>
+                        <th class="p-3">${data.col4}</th>
+                        <th class="p-3 text-right">Actions</th>
+                    `;
+                }
             }
         }
     </script>
