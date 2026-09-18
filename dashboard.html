@@ -3,45 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Admin Dashboard - Mobile POS BD</title>
+    <title>সুপার অ্যাডমিন ড্যাশবোর্ড - Mobile POS BD</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white flex h-screen">
+<body class="bg-slate-900 text-slate-100 flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
-    <div class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
-        <div class="p-5 text-xl font-bold border-b border-gray-700 text-green-400">Super Admin</div>
-        <nav class="flex-1 p-4 space-y-2">
-            <a href="#" class="block py-2.5 px-4 rounded bg-gray-700 text-white font-medium">ড্যাশবোর্ড</a>
-            <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700 text-gray-300">শপ ম্যানেজমেন্ট</a>
-            <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700 text-gray-300">সাবস্ক্রিপশন</a>
-            <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700 text-gray-300">রিপোর্ট</a>
-        </nav>
-        <div class="p-4 border-t border-gray-700">
-            <a href="index.html" class="block text-center bg-red-600 hover:bg-red-700 py-2 rounded text-white font-medium">লগআউট</a>
+    <aside class="w-64 bg-slate-800 border-r border-slate-700 flex flex-col hidden md:flex">
+        <div class="p-6 text-xl font-bold border-b border-slate-700 text-emerald-400 flex items-center gap-2">
+            <span>⚡ Super Admin</span>
         </div>
-    </div>
+        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+            <a href="#" class="block py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-medium shadow-md">ড্যাশবোর্ড ওভারভিউ</a>
+            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">সকল শপ তালিকা</a>
+            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">সাবস্ক্রিপশন ও বিলিং</a>
+            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">সিস্টেম রিপোর্ট</a>
+            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">নিরাপত্তা ও সেটিংস</a>
+        </nav>
+        <div class="p-4 border-t border-slate-700">
+            <a href="index.html" class="flex items-center justify-center gap-2 w-full bg-rose-600 hover:bg-rose-500 py-2.5 rounded-xl text-white font-medium transition">লগআউট</a>
+        </div>
+    </aside>
 
-    <!-- Main Content -->
-    <div class="flex-1 flex flex-col overflow-y-auto">
-        <header class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center">
-            <h1 class="text-xl font-semibold">সুপার অ্যাডমিন ওভারভিউ</h1>
-            <span class="text-sm bg-green-600 px-3 py-1 rounded-full">অ্যাক্টিভ</span>
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <header class="bg-slate-800 border-b border-slate-700 p-4 md:px-8 flex justify-between items-center shadow-sm">
+            <h1 class="text-xl font-bold text-white">সুপার অ্যাডমিন কন্ট্রোল প্যানেল</h1>
+            <div class="flex items-center gap-3">
+                <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full font-medium">স্ট্যাটাস: লাইভ</span>
+            </div>
         </header>
 
-        <main class="p-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700">
-                    <h3 class="text-gray-400 text-sm">মোট শপ</h3>
-                    <p class="text-3xl font-bold mt-2 text-green-400">১২০টি</p>
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
+                    <p class="text-slate-400 text-sm">মোট রেজিস্টার্ড শপ</p>
+                    <h3 class="text-3xl font-bold mt-2 text-emerald-400">১২৮টি</h3>
                 </div>
-                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700">
-                    <h3 class="text-gray-400 text-sm">সক্রিয় সাবস্ক্রিপশন</h3>
-                    <p class="text-3xl font-bold mt-2 text-blue-400">৯৫টি</p>
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
+                    <p class="text-slate-400 text-sm">সক্রিয় সাবস্ক্রিপশন</p>
+                    <h3 class="text-3xl font-bold mt-2 text-sky-400">১১০টি</h3>
                 </div>
-                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700">
-                    <h3 class="text-gray-400 text-sm">আজকের আয়</h3>
-                    <p class="text-3xl font-bold mt-2 text-yellow-400">৳ ১৫,৫০০</p>
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
+                    <p class="text-slate-400 text-sm">মাসিক প্ল্যাটফর্ম আয়</p>
+                    <h3 class="text-3xl font-bold mt-2 text-amber-400">৳ ১,৪৫,০০০</h3>
+                </div>
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
+                    <p class="text-slate-400 text-sm">পেন্ডিং রিকোয়েস্ট</p>
+                    <h3 class="text-3xl font-bold mt-2 text-rose-400">৫টি</h3>
+                </div>
+            </div>
+
+            <!-- Shop Table Section -->
+            <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden shadow-sm">
+                <div class="p-5 border-b border-slate-700 flex justify-between items-center">
+                    <h2 class="text-lg font-bold text-white">সর্বশেষ যুক্ত হওয়া শপসমূহ</h2>
+                    <button class="bg-emerald-600 hover:bg-emerald-500 text-xs px-3 py-2 rounded-lg font-medium transition">নতুন শপ যুক্ত করুন</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-700/50 text-slate-400 text-xs uppercase tracking-wider">
+                                <th class="p-4">শপের নাম</th>
+                                <th class="p-4">প্রোপ্রাইটর</th>
+                                <th class="p-4">ঠিকানা</th>
+                                <th class="p-4">স্ট্যাটাস</th>
+                                <th class="p-4">অ্যাকশন</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700 text-sm">
+                            <tr>
+                                <td class="p-4 font-medium text-white">শাফকাত টেলিকম অ্যান্ড এক্সচেঞ্জ জোন</td>
+                                <td class="p-4 text-slate-300">সজল উদ্দিন</td>
+                                <td class="p-4 text-slate-300">ভালুকা, ময়মনসিংহ</td>
+                                <td class="p-4"><span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full">সক্রিয়</span></td>
+                                <td class="p-4"><button class="text-sky-400 hover:underline">ম্যানেজ</button></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-medium text-white">ভাই ভাই টেলিকম</td>
+                                <td class="p-4 text-slate-300">রহিম মিয়া</td>
+                                <td class="p-4 text-slate-300">ফুলবাড়িয়া, ময়মনসিংহ</td>
+                                <td class="p-4"><span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full">সক্রিয়</span></td>
+                                <td class="p-4"><button class="text-sky-400 hover:underline">ম্যানেজ</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
