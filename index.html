@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile POS BD - Login</title>
+    <title>লগইন - Mobile POS BD</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 flex items-center justify-center h-screen">
+<body class="bg-slate-900 flex items-center justify-center min-h-screen">
 
-    <div class="bg-gray-800 p-8 rounded-2xl shadow-2xl w-96 border border-gray-700">
-        <h2 class="text-2xl font-bold text-center text-white mb-6">Mobile POS BD</h2>
+    <div class="bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md border border-slate-700">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-white mb-2">Mobile POS BD</h1>
+            <p class="text-slate-400 text-sm">রিটেইল ও ইনভেন্টরি ম্যানেজমেন্ট সিস্টেম</p>
+        </div>
         
-        <form id="loginForm" onsubmit="handleLogin(event)">
-            <div class="mb-4">
-                <label class="block text-gray-400 text-sm mb-2">রোল সিলেক্ট করুন</label>
-                <select id="role" class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 focus:outline-none focus:border-green-500">
-                    <option value="admin">Super Admin</option>
-                    <option value="shop">Retail Shop</option>
+        <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-5">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">প্যানেল রোল সিলেক্ট করুন</label>
+                <select id="role" class="w-full bg-slate-700 text-white border border-slate-600 rounded-xl p-3 focus:outline-none focus:border-emerald-500">
+                    <option value="admin">Super Admin (সুপার অ্যাডমিন)</option>
+                    <option value="shop">Retail Shop (রিটেইল শপ)</option>
                 </select>
             </div>
 
-            <div class="mb-4">
-                <label class="block text-gray-400 text-sm mb-2">ইউজারনেম</label>
-                <input type="text" id="username" required class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 focus:outline-none focus:border-green-500" placeholder="আপনার ইউজারনেম দিন">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">ইউজারনেম বা ইমেইল</label>
+                <input type="text" id="username" required class="w-full bg-slate-700 text-white border border-slate-600 rounded-xl p-3 focus:outline-none focus:border-emerald-500" placeholder="আপনার ইউজারনেম দিন">
             </div>
 
-            <div class="mb-6">
-                <label class="block text-gray-400 text-sm mb-2">পাসওয়ার্ড</label>
-                <input type="password" id="password" required class="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 focus:outline-none focus:border-green-500" placeholder="********">
+            <div>
+                <label class="block text-slate-300 text-sm font-medium mb-2">পাসওয়ার্ড</label>
+                <input type="password" id="password" required class="w-full bg-slate-700 text-white border border-slate-600 rounded-xl p-3 focus:outline-none focus:border-emerald-500" placeholder="••••••••">
             </div>
 
-            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold p-3 rounded-lg transition duration-200">লগইন করুন</button>
+            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3 rounded-xl transition duration-200 shadow-lg shadow-emerald-600/30">লগইন করুন</button>
         </form>
     </div>
 
