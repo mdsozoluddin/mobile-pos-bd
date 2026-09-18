@@ -1,72 +1,5 @@
 <?php
 include 'db.php';
-
-// ১. মোট প্রোডাক্ট সংখ্যা বের করা
-$product_count_query = $conn->query("SELECT COUNT(*) as total FROM products");
-$product_count = $product_count_query->fetch_assoc()['total'];
-
-// ২. মোট স্টক পরিমাণ বের করা
-$total_stock_query = $conn->query("SELECT SUM(stock) as total_stock FROM products");
-$total_stock = $total_stock_query->fetch_assoc()['total_stock'] ?? 0;
-
-// ৩. মোট ইনভেন্টরি বা মূল্যের পরিমাণ বের করা (Stock * Price)
-$total_value_query = $conn->query("SELECT SUM(stock * price) as total_value FROM products");
-$total_value = $total_value_query->fetch_assoc()['total_value'] ?? 0;
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Mobile POS - Dashboard</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f9; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .cards { display: flex; gap: 20px; margin-top: 20px; }
-        .card { flex: 1; background: #007bff; color: white; padding: 20px; border-radius: 6px; text-align: center; }
-        .card.green { background: #28a745; }
-        .card.orange { background: #ffc107; color: #333; }
-        .card h3 { margin: 0; font-size: 24px; }
-        .card p { margin: 10px 0 0 0; font-size: 16px; }
-        .menu { margin-top: 30px; display: flex; gap: 10px; }
-        .menu a { padding: 10px 15px; background: #6c757d; color: white; text-decoration: none; border-radius: 4px; }
-        .menu a:hover { background: #5a6268; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>Mobile POS Dashboard</h2>
-    <p>Welcome to your inventory and sales dashboard overview.</p>
-
-    <!-- সামারি কার্ডসমূহ -->
-    <div class="cards">
-        <div class="card">
-            <h3><?php echo $product_count; ?></h3>
-            <p>Total Products</p>
-        </div>
-        <div class="card green">
-            <h3><?php echo $total_stock; ?> Pcs</h3>
-            <p>Total Stock Quantity</p>
-        </div>
-        <div class="card orange">
-            <h3><?php echo number_format($total_value, 2); ?> TK</h3>
-            <p>Total Stock Value</p>
-        </div>
-    </div>
-
-    <!-- ন্যাভিগেশন মেনু -->
-    <div class="menu">
-        <a href="index.php">Manage Inventory</a>
-        <a href="sale.php">Sales Counter</a>
-    </div>
-</div>
-
-</body>
-</html>
-
-<?php
-include 'db.php';
 session_start();
 
 // যদি লগইন করা না থাকে, তবে লগইন পেজে রিডাইরেক্ট করবে
@@ -75,75 +8,125 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// ১. মোট প্রোডাক্ট সংখ্যা বের করা
-$product_count_query = $conn->query("SELECT COUNT(*) as total FROM products");
-$product_count = $product_count_query->fetch_assoc()['total'];
-
-// ২. মোট স্টক পরিমাণ বের করা
-$total_stock_query = $conn->query("SELECT SUM(stock) as total_stock FROM products");
-$total_stock = $total_stock_query->fetch_assoc()['total_stock'] ?? 0;
-
-// ৩. মোট ইনভেন্টরি বা মূল্যের পরিমাণ বের করা (Stock * Price)
-$total_value_query = $conn->query("SELECT SUM(stock * price) as total_value FROM products");
-$total_value = $total_value_query->fetch_assoc()['total_value'] ?? 0;
+// ডেটাবেজ থেকে ডাইনামিক ডাটা সংগ্রহ (যেমন: মোট প্রোডাক্ট, কাস্টমার, খরচ ইত্যাদি)
+$product_count = $conn->query("SELECT COUNT(*) as total FROM products")->fetch_assoc()['total'] ?? 0;
+$total_stock = $conn->query("SELECT SUM(stock) as total_stock FROM products")->fetch_assoc()['total_stock'] ?? 0;
+$total_value = $conn->query("SELECT SUM(stock * price) as total_value FROM products")->fetch_assoc()['total_value'] ?? 0;
+$customer_count = $conn->query("SELECT COUNT(*) as total FROM customers")->fetch_assoc()['total'] ?? 0;
+$total_expense = $conn->query("SELECT SUM(amount) as total FROM expenses")->fetch_assoc()['total'] ?? 0;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mobile POS - Dashboard</title>
+    <title>Mobile POS BD - Super Admin Dashboard</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f9; }
-        .navbar { background: #343a40; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
-        .navbar h2 { margin: 0; font-size: 20px; }
-        .nav-links a { color: white; text-decoration: none; margin-left: 15px; padding: 8px 12px; background: #495057; border-radius: 4px; font-size: 14px; }
-        .nav-links a:hover { background: #007bff; }
-        .container { max-width: 1000px; margin: 30px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .cards { display: flex; gap: 20px; margin-top: 20px; }
-        .card { flex: 1; background: #007bff; color: white; padding: 20px; border-radius: 6px; text-align: center; }
-        .card.green { background: #28a745; }
-        .card.orange { background: #ffc107; color: #333; }
-        .card h3 { margin: 0; font-size: 24px; }
-        .card p { margin: 10px 0 0 0; font-size: 16px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f4f6f9; display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sidebar Styling */
+        .sidebar { width: 260px; background: #0f172a; color: white; display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+        .sidebar-brand { padding: 20px; font-size: 18px; font-weight: bold; background: #1e293b; border-bottom: 1px solid #334155; }
+        .sidebar-brand span { font-size: 12px; color: #94a3b8; display: block; margin-top: 3px; }
+        .sidebar-menu { list-style: none; padding: 15px 0; overflow-y: auto; flex: 1; }
+        .sidebar-menu li a { display: block; padding: 12px 20px; color: #cbd5e1; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .sidebar-menu li a:hover, .sidebar-menu li a.active { background: #1e293b; color: white; border-left: 4px solid #3b82f6; }
+
+        /* Main Content Wrapper */
+        .main-content { flex: 1; display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+
+        /* Top Navbar */
+        .navbar { background: white; padding: 15px 30px; display: flex; justify-content: flex-end; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); gap: 20px; }
+        .admin-profile { background: #3b82f6; color: white; padding: 8px 15px; border-radius: 20px; font-size: 14px; font-weight: 600; }
+
+        /* Dashboard Body */
+        .dashboard-body { padding: 30px; overflow-y: auto; flex: 1; }
+        .welcome-banner { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .welcome-banner h2 { font-size: 24px; margin-bottom: 8px; }
+        .welcome-banner p { font-size: 14px; opacity: 0.9; }
+
+        /* Metric Cards Grid */
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; position: relative; }
+        .card h3 { font-size: 28px; color: #1e293b; margin-bottom: 5px; }
+        .card p { color: #64748b; font-size: 14px; font-weight: 500; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 15px; font-size: 13px; color: #64748b; background: white; border-top: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
 
-<!-- ন্যাভিগেশন মেনু বা হেডার -->
-<div class="navbar">
-    <h2>Mobile POS BD (Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>)</h2>
-    <div class="nav-links">
-        <a href="dashboard.php">Dashboard</a>
-        <a href="index.php">Inventory</a>
-        <a href="sale.php">POS Sale</a>
-        <a href="customers.php">Customers Due</a>
-        <a href="expenses.php">Expenses</a>
-        <a href="reports.php">Reports</a>
-        <a href="logout.php" style="background: #dc3545;">Logout</a>
-    </div>
-</div>
-
-<div class="container">
-    <h2>System Overview Dashboard</h2>
-    <p>Here is the live summary of your mobile retail and inventory management system.</p>
-
-    <!-- সামারি কার্ডসমূহ -->
-    <div class="cards">
-        <div class="card">
-            <h3><?php echo $product_count; ?></h3>
-            <p>Total Products</p>
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <div>
+            <div class="sidebar-brand">
+                Mobile POS BD
+                <span>BUSINESS MANAGEMENT</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="dashboard.php" class="active">Dashboard</a></li>
+                <li><a href="index.php">Inventory / Products</a></li>
+                <li><a href="sale.php">POS Sale Counter</a></li>
+                <li><a href="customers.php">Customer Due List</a></li>
+                <li><a href="expenses.php">Expense Tracker</a></li>
+                <li><a href="reports.php">Business Reports</a></li>
+                <li><a href="invoice.php">Print Invoice</a></li>
+                <li><a href="register.php">Add New User</a></li>
+            </ul>
         </div>
-        <div class="card green">
-            <h3><?php echo $total_stock; ?> Pcs</h3>
-            <p>Total Stock Quantity</p>
-        </div>
-        <div class="card orange">
-            <h3><?php echo number_format($total_value, 2); ?> TK</h3>
-            <p>Total Stock Value</p>
+        <div style="padding: 15px 20px; border-top: 1px solid #334155;">
+            <a href="logout.php" style="color: #ef4444; text-decoration: none; font-size: 14px; font-weight: bold;">Logout</a>
         </div>
     </div>
-</div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Top Navbar -->
+        <div class="navbar">
+            <div class="admin-profile">
+                M &nbsp; <?php echo htmlspecialchars($_SESSION['username']); ?> (Super Admin)
+            </div>
+        </div>
+
+        <!-- Dashboard Body Content -->
+        <div class="dashboard-body">
+            <div class="welcome-banner">
+                <h2>Welcome back, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
+                <p>Monitor sales, inventory stock, customer dues, expenses, and overall business performance from one clean, responsive dashboard[cite: 2].</p>
+            </div>
+
+            <!-- Dynamic Summary Cards -->
+            <div class="cards-grid">
+                <div class="card">
+                    <h3><?php echo $product_count; ?></h3>
+                    <p>Total Products (Items)</p>
+                </div>
+                <div class="card">
+                    <h3><?php echo $total_stock; ?> Pcs</h3>
+                    <p>Total Stock Quantity</p>
+                </div>
+                <div class="card">
+                    <h3><?php echo number_format($total_value, 2); ?> TK</h3>
+                    <p>Total Inventory Value</p>
+                </div>
+                <div class="card">
+                    <h3><?php echo $customer_count; ?></h3>
+                    <p>Total Customers</p>
+                </div>
+                <div class="card">
+                    <h3><?php echo number_format($total_expense, 2); ?> TK</h3>
+                    <p>Total Operational Expenses</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Copyright &copy; 2026 Mobile POS BD. All rights reserved[cite: 2].
+        </div>
+    </div>
 
 </body>
 </html>
