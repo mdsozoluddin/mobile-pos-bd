@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রিটেইল শপ POS - Mobile POS BD</title>
+    <title>Retail Shop Dashboard - Mobile POS BD</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-100 text-slate-800 flex h-screen overflow-hidden">
@@ -11,17 +11,29 @@
     <!-- Sidebar -->
     <aside class="w-64 bg-emerald-900 text-white flex flex-col hidden md:flex">
         <div class="p-6 text-xl font-bold border-b border-emerald-800 flex items-center gap-2">
-            <span>🛒 শপ পোর্টাল</span>
+            <span>🛒 Shop Portal</span>
         </div>
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-            <a href="#" class="block py-2.5 px-4 rounded-xl bg-emerald-800 text-white font-medium shadow-md">POS বিক্রয় টার্মিনাল</a>
-            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition">স্টক ও ইনভেন্টরি</a>
-            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition">IMEI ট্র্যাকিং</a>
-            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition">বিক্রয় ইতিহাস</a>
-            <a href="#" class="block py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition">খরচ ও হিসাব</a>
+        <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto text-sm">
+            <button onclick="switchShopTab('pos')" id="shop-nav-pos" class="w-full text-left py-2.5 px-4 rounded-xl bg-emerald-800 text-white font-medium shadow-md transition flex items-center gap-3">
+                <span>⚡</span> POS Terminal
+            </button>
+            <button onclick="switchShopTab('inventory')" id="shop-nav-inventory" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
+                <span>📦</span> Stock & Inventory
+            </button>
+            <button onclick="switchShopTab('imei')" id="shop-nav-imei" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
+                <span>📱</span> IMEI Tracking
+            </button>
+            <button onclick="switchShopTab('history')" id="shop-nav-history" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
+                <span>📜</span> Sales History
+            </button>
+            <button onclick="switchShopTab('expense')" id="shop-nav-expense" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3">
+                <span>💰</span> Expense & Account
+            </button>
         </nav>
         <div class="p-4 border-t border-emerald-800">
-            <a href="index.html" class="flex items-center justify-center gap-2 w-full bg-rose-600 hover:bg-rose-500 py-2.5 rounded-xl text-white font-medium transition">লগআউট</a>
+            <a href="index.html" class="flex items-center justify-center gap-2 w-full bg-rose-600 hover:bg-rose-500 py-2.5 rounded-xl text-white font-medium transition text-sm">
+                <span>🚪</span> Logout
+            </a>
         </div>
     </aside>
 
@@ -29,58 +41,108 @@
     <div class="flex-1 flex flex-col overflow-hidden">
         <header class="bg-white border-b border-slate-200 p-4 md:px-8 flex justify-between items-center shadow-sm">
             <div>
-                <h1 class="text-xl font-bold text-emerald-900">পয়েন্ট অব সেলস (POS)</h1>
-                <p class="text-xs text-slate-500">শাফকাত টেলিকম অ্যান্ড এক্সচেঞ্জ জোন</p>
+                <h1 id="shop-page-title" class="text-xl font-bold text-emerald-900">POS Bikroy Terminal</h1>
+                <p class="text-xs text-slate-500">Shafkat Telecom & Exchange Zone</p>
             </div>
-            <span class="text-xs bg-emerald-100 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full font-medium">শপ আইডি: #POS-102</span>
+            <span class="text-xs bg-emerald-100 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full font-medium">Shop ID: #POS-102</span>
         </header>
 
-        <main class="flex-1 overflow-y-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left Side: Product Scanning & Selection -->
-            <div class="lg:col-span-2 space-y-5">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                    <label class="block text-sm font-bold text-slate-700 mb-2">পণ্য বা IMEI স্ক্যান করুন</label>
-                    <div class="flex gap-2">
-                        <input type="text" placeholder="IMEI নম্বর বা প্রোডাক্টের নাম লিখে এন্টার দিন..." class="flex-1 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-emerald-600 text-sm">
-                        <button class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 rounded-xl font-medium transition">যোগ করুন</button>
+        <main class="flex-1 overflow-y-auto p-4 md:p-6">
+            
+            <!-- Shop Tab: POS Terminal -->
+            <div id="shop-tab-pos" class="shop-content-tab grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 space-y-5">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">Ponno ba IMEI Scan korun</label>
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="IMEI number ba product name likhe enter din..." class="flex-1 border border-slate-300 rounded-xl p-3 focus:outline-none focus:border-emerald-600 text-sm">
+                            <button onclick="alert('Ponno cart-e jog kora hoyeche!')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 rounded-xl font-medium transition">Jog korun</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm min-h-[300px]">
+                        <h2 class="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">Cart-e thaka ponnosamuh</h2>
+                        <div class="flex flex-col items-center justify-center h-48 text-slate-400 border-2 border-dashed border-slate-200 rounded-xl">
+                            <p class="text-sm">Ekhono kono ponno cart-e jog kora hoyni</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm min-h-[300px]">
-                    <h2 class="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">কার্টে থাকা পণ্যসমূহ</h2>
-                    <div class="flex flex-col items-center justify-center h-48 text-slate-400 border-2 border-dashed border-slate-200 rounded-xl">
-                        <p class="text-sm">এখনো কোনো পণ্য কার್ಟে যোগ করা হয়নি</p>
-                        <span class="text-xs text-slate-400 mt-1">উপরের বক্স থেকে পণ্য সার্চ করে সিলেক্ট করুন</span>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between h-fit">
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-bold text-emerald-900 border-b border-slate-100 pb-3">Bill Summary</h2>
+                        <div class="flex justify-between text-sm text-slate-600">
+                            <span>Total Item:</span>
+                            <span class="font-bold text-slate-800">0 Ti</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-slate-600">
+                            <span>Subtotal:</span>
+                            <span class="font-bold text-slate-800">৳ 0.00</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-emerald-700 border-t border-slate-100 pt-3">
+                            <span>Prodey Mot Taka:</span>
+                            <span>৳ 0.00</span>
+                        </div>
                     </div>
+                    <button onclick="alert('Payment somponno ebong print kora hocche!')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3.5 rounded-xl mt-6 transition duration-200 shadow-lg shadow-emerald-600/20">Payment & Print</button>
                 </div>
             </div>
 
-            <!-- Right Side: Billing Summary -->
-            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between h-fit">
-                <div class="space-y-4">
-                    <h2 class="text-lg font-bold text-emerald-900 border-b border-slate-100 pb-3">বিল সামারি</h2>
-                    
-                    <div class="flex justify-between text-sm text-slate-600">
-                        <span>মোট আইটেম:</span>
-                        <span class="font-bold text-slate-800">০ টি</span>
-                    </div>
-                    <div class="flex justify-between text-sm text-slate-600">
-                        <span>সাবটোটাল:</span>
-                        <span class="font-bold text-slate-800">৳ ০.০০</span>
-                    </div>
-                    <div class="flex justify-between text-sm text-slate-600">
-                        <span>ডিসকাউন্ট:</span>
-                        <span class="font-bold text-slate-800">৳ ০.০০</span>
-                    </div>
-                    <div class="flex justify-between text-base font-bold text-emerald-700 border-t border-slate-100 pt-3">
-                        <span>প্রদেয় মোট টাকা:</span>
-                        <span>৳ ০.০০</span>
-                    </div>
+            <!-- Shop Tab: Inventory -->
+            <div id="shop-tab-inventory" class="shop-content-tab hidden space-y-4">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Stock & Inventory</h2>
+                    <p class="text-slate-600 text-sm">Ekhane apnar shop-er current stock ebong new product add korar options thakbe.</p>
                 </div>
-
-                <button class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-3.5 rounded-xl mt-6 transition duration-200 shadow-lg shadow-emerald-600/20">পেমেন্ট সম্পন্ন করুন & প্রিন্ট</button>
             </div>
+
+            <!-- Shop Tab: IMEI Tracking -->
+            <div id="shop-tab-imei" class="shop-content-tab hidden space-y-4">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-emerald-900 mb-2">IMEI Tracking System</h2>
+                    <p class="text-slate-600 text-sm">Mobile set-er IMEI number diye stock ebong sales history track korun.</p>
+                </div>
+            </div>
+
+            <!-- Shop Tab: History -->
+            <div id="shop-tab-history" class="shop-content-tab hidden space-y-4">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Sales History</h2>
+                    <p class="text-slate-600 text-sm">Diner shob bikroyer report ekhane dekha jabe.</p>
+                </div>
+            </div>
+
+            <!-- Shop Tab: Expense -->
+            <div id="shop-tab-expense" class="shop-content-tab hidden space-y-4">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-emerald-900 mb-2">Expense & Accounts</h2>
+                    <p class="text-slate-600 text-sm">Dokaner daily khoroch ebong hishab nikash.</p>
+                </div>
+            </div>
+
         </main>
     </div>
+
+    <script>
+        function switchShopTab(tabId) {
+            const tabs = document.querySelectorAll('.shop-content-tab');
+            tabs.forEach(tab => tab.classList.add('hidden'));
+
+            const navButtons = document.querySelectorAll('aside nav button');
+            navButtons.forEach(btn => {
+                btn.className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-emerald-800 text-emerald-100 transition flex items-center gap-3";
+            });
+
+            const targetTab = document.getElementById('shop-tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+            }
+
+            const targetNav = document.getElementById('shop-nav-' + tabId);
+            if (targetNav) {
+                targetNav.className = "w-full text-left py-2.5 px-4 rounded-xl bg-emerald-800 text-white font-medium shadow-md transition flex items-center gap-3";
+            }
+        }
+    </script>
 </body>
 </html>
