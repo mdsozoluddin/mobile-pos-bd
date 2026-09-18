@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সুপার অ্যাডমিন ড্যাশবোর্ড - Mobile POS BD</title>
+    <title>Super Admin Dashboard - Mobile POS BD</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-900 text-slate-100 flex h-screen overflow-hidden">
@@ -13,179 +13,224 @@
         <div class="p-6 text-xl font-bold border-b border-slate-700 text-emerald-400 flex items-center gap-2">
             <span>⚡ Super Admin</span>
         </div>
-        <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-            <button onclick="switchTab('overview')" id="nav-overview" class="w-full text-left py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-medium shadow-md transition">ড্যাশবোর্ড ওভারভিউ</button>
-            <button onclick="switchTab('shops')" id="nav-shops" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">সকল শপ তালিকা</button>
-            <button onclick="switchTab('subscription')" id="nav-subscription" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">সাবস্ক্রিপশন ও বিলিং</button>
-            <button onclick="switchTab('reports')" id="nav-reports" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">সিস্টেম রিপোর্ট</button>
-            <button onclick="switchTab('settings')" id="nav-settings" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition">নিরাপত্তা ও সেটিংস</button>
+        <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto text-sm">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full text-left py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-medium shadow-md transition flex items-center gap-3">
+                <span>📊</span> Dashboard
+            </button>
+            <button onclick="switchTab('access-setup')" id="nav-access-setup" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>⚙️</span> Access Setup
+            </button>
+            <button onclick="switchTab('user-list')" id="nav-user-list" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>👥</span> User List
+            </button>
+            <button onclick="switchTab('user-payment')" id="nav-user-payment" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>💳</span> User Payment
+            </button>
+            <button onclick="switchTab('notice')" id="nav-notice" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>🔔</span> Notice
+            </button>
+            <button onclick="switchTab('terms')" id="nav-terms" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>📄</span> Terms & Condition
+            </button>
+            <button onclick="switchTab('bg-setup')" id="nav-bg-setup" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>🖼️</span> Registration Background
+            </button>
+            <button onclick="switchTab('support')" id="nav-support" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>❓</span> Help & Support
+            </button>
+            <button onclick="switchTab('backup')" id="nav-backup" class="w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3">
+                <span>💾</span> Database Backup
+            </button>
         </nav>
         <div class="p-4 border-t border-slate-700">
-            <a href="index.html" class="flex items-center justify-center gap-2 w-full bg-rose-600 hover:bg-rose-500 py-2.5 rounded-xl text-white font-medium transition">লগআউট</a>
+            <a href="index.html" class="flex items-center justify-center gap-2 w-full bg-rose-600 hover:bg-rose-500 py-2.5 rounded-xl text-white font-medium transition text-sm">
+                <span>🚪</span> Logout
+            </a>
         </div>
     </aside>
 
     <!-- Main Content Area -->
     <div class="flex-1 flex flex-col overflow-hidden">
-        <header class="bg-slate-800 border-b border-slate-700 p-4 md:px-8 flex justify-between items-center shadow-sm">
-            <h1 id="page-title" class="text-xl font-bold text-white">সুপার অ্যাডমিন কন্ট্রোল প্যানেল</h1>
-            <div class="flex items-center gap-3">
-                <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1.5 rounded-full font-medium">স্ট্যাটাস: লাইভ</span>
+        <header class="bg-slate-800 border-b border-slate-700 p-4 md:px-8 flex justify-between items-center shadow-sm relative">
+            <h1 id="page-title" class="text-xl font-bold text-white">Dashboard Overview</h1>
+            
+            <!-- Top Right Profile Dropdown Menu -->
+            <div class="relative">
+                <button onclick="toggleProfileDropdown()" class="flex items-center gap-3 bg-slate-700/60 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-xl transition">
+                    <div class="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">M</div>
+                    <div class="text-left hidden sm:block">
+                        <p class="text-xs font-bold text-white leading-tight">Mobile POS BD</p>
+                        <p class="text-[10px] text-slate-400">Administrator</p>
+                    </div>
+                    <span class="text-xs text-slate-400">▼</span>
+                </button>
+
+                <!-- Dropdown Box -->
+                <div id="profileDropdown" class="hidden absolute right-0 mt-2 w-56 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl py-2 z-50 text-sm">
+                    <div class="px-4 py-2 border-b border-slate-700 mb-1">
+                        <p class="font-bold text-white text-xs">Mobile POS BD</p>
+                        <p class="text-[10px] text-slate-400">Administrator Profile</p>
+                    </div>
+                    <button onclick="switchTab('profile'); toggleProfileDropdown();" class="w-full text-left px-4 py-2 hover:bg-slate-700 text-slate-300 flex items-center gap-2"><span>👤</span> My Profile</button>
+                    <button onclick="switchTab('company'); toggleProfileDropdown();" class="w-full text-left px-4 py-2 hover:bg-slate-700 text-slate-300 flex items-center gap-2"><span>🏢</span> Company Profile</button>
+                    <button onclick="switchTab('password'); toggleProfileDropdown();" class="w-full text-left px-4 py-2 hover:bg-slate-700 text-slate-300 flex items-center gap-2"><span>🔑</span> Password Change</button>
+                    <div class="border-t border-slate-700 my-1"></div>
+                    <a href="index.html" class="w-full text-left px-4 py-2 hover:bg-rose-500/10 text-rose-400 flex items-center gap-2 font-medium"><span>🚪</span> Logout</a>
+                </div>
             </div>
         </header>
 
         <main class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
             
-            <!-- Tab 1: Overview -->
-            <div id="tab-overview" class="space-y-6">
+            <!-- Tab: Dashboard -->
+            <div id="tab-dashboard" class="space-y-6 content-tab">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
-                        <p class="text-slate-400 text-sm">মোট রেজিস্টার্ড শপ</p>
+                        <p class="text-slate-400 text-sm">Total Shops</p>
                         <h3 class="text-3xl font-bold mt-2 text-emerald-400">১২৮টি</h3>
                     </div>
                     <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
-                        <p class="text-slate-400 text-sm">সক্রিয় সাবস্ক্রিপশন</p>
+                        <p class="text-slate-400 text-sm">Active Subscriptions</p>
                         <h3 class="text-3xl font-bold mt-2 text-sky-400">১১০টি</h3>
                     </div>
                     <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
-                        <p class="text-slate-400 text-sm">মাসিক প্ল্যাটফর্ম আয়</p>
+                        <p class="text-slate-400 text-sm">Monthly Earnings</p>
                         <h3 class="text-3xl font-bold mt-2 text-amber-400">৳ ১,৪৫,০০০</h3>
                     </div>
                     <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700 shadow-sm">
-                        <p class="text-slate-400 text-sm">পেন্ডিং রিকোয়েস্ট</p>
+                        <p class="text-slate-400 text-sm">Pending Requests</p>
                         <h3 class="text-3xl font-bold mt-2 text-rose-400">৫টি</h3>
                     </div>
                 </div>
+            </div>
 
-                <div class="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden shadow-sm">
-                    <div class="p-5 border-b border-slate-700 flex justify-between items-center">
-                        <h2 class="text-lg font-bold text-white">সর্বশেষ যুক্ত হওয়া শপসমূহ</h2>
-                        <button onclick="openAddShopModal()" class="bg-emerald-600 hover:bg-emerald-500 text-xs px-3 py-2 rounded-lg font-medium transition">নতুন শপ যুক্ত করুন</button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-slate-700/50 text-slate-400 text-xs uppercase tracking-wider">
-                                    <th class="p-4">শপের নাম</th>
-                                    <th class="p-4">প্রোপ্রাইটর</th>
-                                    <th class="p-4">ঠিকানা</th>
-                                    <th class="p-4">স্ট্যাটাস</th>
-                                    <th class="p-4">অ্যাকশন</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-700 text-sm">
-                                <tr>
-                                    <td class="p-4 font-medium text-white">শাফকাত টেলিকম অ্যান্ড এক্সচেঞ্জ জোন</td>
-                                    <td class="p-4 text-slate-300">সজল উদ্দিন</td>
-                                    <td class="p-4 text-slate-300">ভালুকা, ময়মনসিংহ</td>
-                                    <td class="p-4"><span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full">সক্রিয়</span></td>
-                                    <td class="p-4"><button onclick="alert('শপ ম্যানেজ অপশন')" class="text-sky-400 hover:underline">ম্যানেজ</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <!-- Tab: Access Setup -->
+            <div id="tab-access-setup" class="hidden content-tab space-y-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-2">Access Setup</h2>
+                    <p class="text-slate-400 text-sm">Manage administrative roles and permissions here.</p>
                 </div>
             </div>
 
-            <!-- Tab 2: Shops List -->
-            <div id="tab-shops" class="hidden space-y-6">
+            <!-- Tab: User List -->
+            <div id="tab-user-list" class="hidden content-tab space-y-4">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold text-white">সকল রিটেইল শপের তালিকা</h2>
-                        <button onclick="openAddShopModal()" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-xl text-sm font-medium transition">নতুন শপ যোগ করুন</button>
-                    </div>
-                    <p class="text-slate-400 text-sm">এখানে আপনার সিস্টেমে যুক্ত থাকা সমস্ত শপের সম্পূর্ণ তালিকা ও স্ট্যাটাস দেখতে পাবেন।</p>
+                    <h2 class="text-xl font-bold text-white mb-2">User List (Retail Shops)</h2>
+                    <p class="text-slate-400 text-sm">All registered retail shop accounts and management list.</p>
                 </div>
             </div>
 
-            <!-- Tab 3: Subscription -->
-            <div id="tab-subscription" class="hidden space-y-6">
+            <!-- Tab: User Payment -->
+            <div id="tab-user-payment" class="hidden content-tab space-y-4">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <h2 class="text-xl font-bold text-white mb-2">সাবস্ক্রিপশন ও বিলিং ম্যানেজমেন্ট</h2>
-                    <p class="text-slate-400 text-sm">কোন শপের সাবস্ক্রিপশন কবে শেষ হচ্ছে এবং পেমেন্ট স্ট্যাটাস কী, তা এখান থেকে কন্ট্রোল করা যাবে।</p>
+                    <h2 class="text-xl font-bold text-white mb-2">User Payment History</h2>
+                    <p class="text-slate-400 text-sm">Monitor subscription payments and billing history.</p>
                 </div>
             </div>
 
-            <!-- Tab 4: Reports -->
-            <div id="tab-reports" class="hidden space-y-6">
+            <!-- Tab: Notice -->
+            <div id="tab-notice" class="hidden content-tab space-y-4">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <h2 class="text-xl font-bold text-white mb-2">সিস্টেম রিপোর্ট ও অ্যানালিটিক্স</h2>
-                    <p class="text-slate-400 text-sm">সার্বিক বিক্রয়, আয় এবং প্ল্যাটফর্ম গ্রোথ রিপোর্ট।</p>
+                    <h2 class="text-xl font-bold text-white mb-2">Notice Board</h2>
+                    <p class="text-slate-400 text-sm">Publish announcements and updates for all retail shops.</p>
                 </div>
             </div>
 
-            <!-- Tab 5: Settings -->
-            <div id="tab-settings" class="hidden space-y-6">
+            <!-- Tab: Terms & Condition -->
+            <div id="tab-terms" class="hidden content-tab space-y-4">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                    <h2 class="text-xl font-bold text-white mb-2">সিস্টেম সেটিংস</h2>
-                    <p class="text-slate-400 text-sm">অ্যাডমিন পাসওয়ার্ড পরিবর্তন এবং সিস্টেম কনফিগারেশন।</p>
+                    <h2 class="text-xl font-bold text-white mb-2">Terms & Conditions</h2>
+                    <p class="text-slate-400 text-sm">Update platform usage policies and terms.</p>
+                </div>
+            </div>
+
+            <!-- Tab: Registration Background -->
+            <div id="tab-bg-setup" class="hidden content-tab space-y-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-2">Registration Background</h2>
+                    <p class="text-slate-400 text-sm">Customize registration page banners and backgrounds.</p>
+                </div>
+            </div>
+
+            <!-- Tab: Help & Support -->
+            <div id="tab-support" class="hidden content-tab space-y-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-2">Help & Support</h2>
+                    <p class="text-slate-400 text-sm">Manage support tickets and inquiries from shops.</p>
+                </div>
+            </div>
+
+            <!-- Tab: Database Backup -->
+            <div id="tab-backup" class="hidden content-tab space-y-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-2">Database Backup</h2>
+                    <p class="text-slate-400 text-sm mb-4">Secure system backup and restore points.</p>
+                    <button onclick="alert('Backup downloaded successfully!')" class="bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-xl text-sm font-medium transition">Download Backup</button>
+                </div>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div id="tab-profile" class="hidden content-tab space-y-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-2">My Profile</h2>
+                    <p class="text-slate-400 text-sm">Administrator personal information.</p>
+                </div>
+            </div>
+
+            <div id="tab-company" class="hidden content-tab space-y-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-2">Company Profile</h2>
+                    <p class="text-slate-400 text-sm">Mobile POS BD company details and branding.</p>
+                </div>
+            </div>
+
+            <div id="tab-password" class="hidden content-tab space-y-4">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <h2 class="text-xl font-bold text-white mb-2">Password Change</h2>
+                    <p class="text-slate-400 text-sm">Update administrator security credentials.</p>
                 </div>
             </div>
 
         </main>
     </div>
 
-    <!-- Add Shop Modal -->
-    <div id="addShopModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
-        <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-lg border border-slate-700 text-white">
-            <h3 class="text-xl font-bold mb-4 text-emerald-400">নতুন রিটেইল শপ যুক্ত করুন</h3>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm text-slate-300 mb-1">শপের নাম</label>
-                    <input type="text" id="shopName" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="শপের নাম দিন">
-                </div>
-                <div>
-                    <label class="block text-sm text-slate-300 mb-1">প্রোপ্রাইটরের নাম</label>
-                    <input type="text" id="ownerName" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="মালিকের নাম">
-                </div>
-                <div>
-                    <label class="block text-sm text-slate-300 mb-1">ঠিকানা</label>
-                    <input type="text" id="shopAddress" class="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 text-white focus:outline-none focus:border-emerald-500" placeholder="শপের ঠিকানা">
-                </div>
-            </div>
-            <div class="flex gap-3 mt-6">
-                <button onclick="closeAddShopModal()" class="flex-1 bg-slate-700 hover:bg-slate-600 py-2.5 rounded-xl font-medium transition">বাতিল</button>
-                <button onclick="saveShop()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 py-2.5 rounded-xl font-medium transition">সংরক্ষণ করুন</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         function switchTab(tabId) {
             // Hide all tabs
-            document.getElementById('tab-overview').classList.add('hidden');
-            document.getElementById('tab-shops').classList.add('hidden');
-            document.getElementById('tab-subscription').classList.add('hidden');
-            document.getElementById('tab-reports').classList.add('hidden');
-            document.getElementById('tab-settings').classList.add('hidden');
+            const tabs = document.querySelectorAll('.content-tab');
+            tabs.forEach(tab => tab.classList.add('hidden'));
 
-            // Remove active class from all nav buttons
-            document.getElementById('nav-overview').className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition";
-            document.getElementById('nav-shops').className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition";
-            document.getElementById('nav-subscription').className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition";
-            document.getElementById('nav-reports').className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition";
-            document.getElementById('nav-settings').className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition";
+            // Remove active style from all sidebar buttons
+            const navButtons = document.querySelectorAll('aside nav button');
+            navButtons.forEach(btn => {
+                btn.className = "w-full text-left py-2.5 px-4 rounded-xl hover:bg-slate-700 text-slate-300 transition flex items-center gap-3";
+            });
 
-            // Show selected tab & set active button style
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
-            document.getElementById('nav-' + tabId).className = "w-full text-left py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-medium shadow-md transition";
+            // Show selected tab
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+            }
+
+            // Highlight selected nav button if exists
+            const targetNav = document.getElementById('nav-' + tabId);
+            if (targetNav) {
+                targetNav.className = "w-full text-left py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-medium shadow-md transition flex items-center gap-3";
+            }
         }
 
-        function openAddShopModal() {
-            document.getElementById('addShopModal').classList.remove('hidden');
+        function toggleProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('hidden');
         }
 
-        function closeAddShopModal() {
-            document.getElementById('addShopModal').classList.add('hidden');
-        }
-
-        function saveShop() {
-            const name = document.getElementById('shopName').value;
-            if(name) {
-                alert('শপটি সফলভাবে যুক্ত হয়েছে!');
-                closeAddShopModal();
-            } else {
-                alert('দয়া করে শপের নাম লিখুন।');
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.closest('button')) {
+                const dropdown = document.getElementById('profileDropdown');
+                if (dropdown && !dropdown.classList.contains('hidden')) {
+                    dropdown.classList.add('hidden');
+                }
             }
         }
     </script>
