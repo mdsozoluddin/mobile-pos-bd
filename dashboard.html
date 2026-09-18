@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard - Mobile POS BD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex h-screen">
+
+    <!-- Sidebar -->
+    <div class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+        <div class="p-5 text-xl font-bold border-b border-gray-700 text-green-400">Super Admin</div>
+        <nav class="flex-1 p-4 space-y-2">
+            <a href="#" class="block py-2.5 px-4 rounded bg-gray-700 text-white font-medium">ড্যাশবোর্ড</a>
+            <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700 text-gray-300">শপ ম্যানেজমেন্ট</a>
+            <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700 text-gray-300">সাবস্ক্রিপশন</a>
+            <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700 text-gray-300">রিপোর্ট</a>
+        </nav>
+        <div class="p-4 border-t border-gray-700">
+            <a href="index.html" class="block text-center bg-red-600 hover:bg-red-700 py-2 rounded text-white font-medium">লগআউট</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-y-auto">
+        <header class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center">
+            <h1 class="text-xl font-semibold">সুপার অ্যাডমিন ওভারভিউ</h1>
+            <span class="text-sm bg-green-600 px-3 py-1 rounded-full">অ্যাক্টিভ</span>
+        </header>
+
+        <main class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700">
+                    <h3 class="text-gray-400 text-sm">মোট শপ</h3>
+                    <p class="text-3xl font-bold mt-2 text-green-400">১২০টি</p>
+                </div>
+                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700">
+                    <h3 class="text-gray-400 text-sm">সক্রিয় সাবস্ক্রিপশন</h3>
+                    <p class="text-3xl font-bold mt-2 text-blue-400">৯৫টি</p>
+                </div>
+                <div class="bg-gray-800 p-5 rounded-xl border border-gray-700">
+                    <h3 class="text-gray-400 text-sm">আজকের আয়</h3>
+                    <p class="text-3xl font-bold mt-2 text-yellow-400">৳ ১৫,৫০০</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
